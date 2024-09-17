@@ -1,0 +1,116 @@
+#scalar Date
+#type Query {
+#    overview(request: PaymentMessageOverviewRequest): PaymentMessageOverviewResponse
+#    findAllPosts: [Post]
+#    findPostById(id: ID!): Post
+#}
+#
+#type Post {
+#    id: ID!
+#    title: String!
+#    slug: String!
+#    date: Date
+#    timeToRead: Int
+#    tags: String
+#}
+#type PaymentMessageOverviewResponse {
+#    grpHdr: GroupHeader
+#    payObj: [PaymentObject]
+#    done: String
+#}
+#
+#type GroupHeader {
+#    responseDiagnostics: ResponseDiagnostics
+#}
+#
+#type ResponseDiagnostics {
+#    errMsgCntnt: [ErrorMessageContent]
+#}
+#
+#type ErrorMessageContent {
+#    errCount: String
+#    errCd: String
+#    param: [String]
+#}
+#
+#type PaymentObject {
+#    paymentMessageResponse: PaymentMessageResponse
+#}
+#
+#type PaymentMessageResponse {
+#    payMsgInfo: PaymentMessageHeader
+#    processingDate: String
+#    importDtTm: String
+#    createDtTim: String
+#    outputDt: String
+#    credit: MinMax
+#    debit: MinMax
+#    branch: Branch
+#    action: String
+#    noOfBulks: Int
+#    multiEyeTrigger: String
+#    ackNakOutputDate: String
+#    incMtMxMsgInd: String
+#    sendingSystem: String
+#}
+#
+#type PaymentMessageHeader {
+#    id: String
+#    prio: String
+#    fileRef: String
+#    sender: String
+#    receiver: String
+#    state: String
+#}
+#
+#type MinMax {
+#    min: String
+#    max: String
+#}
+#
+#type Branch {
+#    id: String
+#    name: String
+#}
+#
+#input PaymentMessageOverviewRequest {
+#    grpHdrReq: GroupHeaderReq
+#    pymntMsgReq: PaymentMessageRequest
+#}
+#
+#input GroupHeaderReq {
+#    max: Int
+#}
+#
+#input PaymentMessageRequest {
+#    payMsgInfo: PaymentMessageHeaderInput
+#    processingDate: DateRange
+#    credit: MinMaxInput
+#    debit: MinMaxInput
+#    size: MinMaxInput
+#    branch: BranchInput
+#}
+#
+#input PaymentMessageHeaderInput {
+#    id: String
+#    prio: String
+#    fileRef: String
+#    sender: String
+#    receiver: String
+#    state: String
+#}
+#
+#input DateRange {
+#    startDate: String
+#    endDate: String
+#}
+#
+#input MinMaxInput {
+#    min: String
+#    max: String
+#}
+#
+#input BranchInput {
+#    id: String
+#    name: String
+#}
