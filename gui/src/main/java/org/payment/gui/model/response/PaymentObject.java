@@ -10,10 +10,10 @@ import lombok.*;
 @Setter
 public class PaymentObject {
 
-    private PaymentMessageResponse paymentMessageResponse;
+    private PaymentMessageResponse pymtMsg;
 
 
     public void setPaymentMessage(PaymentMessageResponse pymntMsgResp) {
-        this.paymentMessageResponse = pymntMsgResp;
+        this.pymtMsg = pymntMsgResp;
     }
 }

@@ -8,10 +8,16 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <modules>
+        <module>commons</module>
+        <module>persistence</module>
+        <module>gui</module>
+
+    </modules>
     <groupId>org.payment</groupId>
     <artifactId>PaymentService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>PaymentService</name>
     <description>PaymentService</description>
     <url/>

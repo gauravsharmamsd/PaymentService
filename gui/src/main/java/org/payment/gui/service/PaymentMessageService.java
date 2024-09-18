@@ -3,6 +3,7 @@ package org.payment.gui.service;
 import com.equens.bil.core.BilException;
 import com.equens.bil.core.dao.cursors.Cursor;
 import com.equens.bil.core.dto.PaymentMessage;
+import com.equens.bil.core.dto.enums.MessageE;
 import com.equens.bil.core.dto.enums.PaymentMessageE;
 
 import com.equens.bil.core.dto.search.PaymentMessageS;
@@ -28,7 +29,8 @@ public class PaymentMessageService extends BaseExecutor {
 
         Map<Integer, Boolean> requestMap = requestedLDMs();
         PaymentMessageS paymentMessageS = translateRequest(paymentMessageOverviewRequest);
-        int maxnum = paymentMessageOverviewRequest.getGrpHdrReq().getMaxNum() + 1;
+        //int maxnum = paymentMessageOverviewRequest.getGrpHdrReq().getMaxNum() + 1;
+        int maxnum = 100;
 
         //actual call to get the payment message
         Cursor<PaymentMessage> paymentMessageOverview = getDAOFactory().getPaymentMessageOverview()
@@ -67,7 +69,7 @@ public class PaymentMessageService extends BaseExecutor {
 
             pymntObjList.add(pymntObj);
 
-            next = paymentMessageOverview.getNext();
+            next = null;
 
         }
         return pymntObjList;
@@ -80,7 +82,7 @@ public class PaymentMessageService extends BaseExecutor {
         for (PaymentMessageE value : values) {
             requestMap.put(value.getType(), Boolean.TRUE);
         }
-
+ requestMap.remove(MessageE.IN_OUT_INDICATOR.getType());
         return requestMap;
     }
 
