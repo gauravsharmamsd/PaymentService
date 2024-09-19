@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class GroupHeaderReq {
-    private Integer maxNum;
+    private int maxNum;
 }
