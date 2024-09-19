@@ -7,6 +7,9 @@ import com.equens.bil.core.dto.enums.MessageE;
 import com.equens.bil.core.dto.enums.PaymentMessageE;
 
 import com.equens.bil.core.dto.search.PaymentMessageS;
+import org.payment.gui.cmn.ErrorMessageContent;
+import org.payment.gui.cmn.GroupHeader;
+import org.payment.gui.cmn.ResponseDiagnostics;
 import org.payment.gui.model.BaseExecutor;
 import org.payment.gui.mapper.request.PaymentMessageOverviewRequestSCMapper;
 import org.payment.gui.mapper.response.PaymentMessageResponseMapper;
@@ -16,10 +19,7 @@ import org.payment.gui.model.response.PaymentMessageOverviewResponse;
 import org.payment.gui.model.response.PaymentMessageResponse;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PaymentMessageService extends BaseExecutor {
@@ -29,8 +29,7 @@ public class PaymentMessageService extends BaseExecutor {
 
         Map<Integer, Boolean> requestMap = requestedLDMs();
         PaymentMessageS paymentMessageS = translateRequest(paymentMessageOverviewRequest);
-        //int maxnum = paymentMessageOverviewRequest.getGrpHdrReq().getMaxNum() + 1;
-        int maxnum = 100;
+        int maxnum = paymentMessageOverviewRequest.getGrpHdrReq().getMaxNum() + 1;
 
         //actual call to get the payment message
         Cursor<PaymentMessage> paymentMessageOverview = getDAOFactory().getPaymentMessageOverview()
@@ -44,6 +43,22 @@ public class PaymentMessageService extends BaseExecutor {
 
         PaymentMessageOverviewResponse paymentMessageOverviewResponse = new PaymentMessageOverviewResponse();
         paymentMessageOverviewResponse.setPaymentObjects(pymntObjList);
+
+
+        paymentMessageOverviewResponse.setGrpHdr(
+                GroupHeader.builder()
+                        .responseDiagnostics(
+                                ResponseDiagnostics.builder()
+                                        .errMsgCntnt(Collections.singletonList(
+                                                ErrorMessageContent.builder()
+                                                        .errCd("0000")
+                                                        .errCount("1")
+                                                        .build()
+                                        ))
+                                        .build()
+                        )
+                        .build()
+        );
         return paymentMessageOverviewResponse;
 
 
@@ -69,7 +84,7 @@ public class PaymentMessageService extends BaseExecutor {
 
             pymntObjList.add(pymntObj);
 
-            next = null;
+            next = paymentMessageOverview.getNext();
 
         }
         return pymntObjList;
@@ -82,7 +97,7 @@ public class PaymentMessageService extends BaseExecutor {
         for (PaymentMessageE value : values) {
             requestMap.put(value.getType(), Boolean.TRUE);
         }
- requestMap.remove(MessageE.IN_OUT_INDICATOR.getType());
+        requestMap.remove(MessageE.IN_OUT_INDICATOR.getType());
         return requestMap;
     }
 

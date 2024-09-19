@@ -1,0 +1,67 @@
+
+
+type PaymentMessageOverviewResponse {
+    grpHdr: GroupHeader
+    payObj: [PaymentObject]
+    done: String
+}
+
+type GroupHeader {
+    responseDiagnostics: ResponseDiagnostics
+}
+
+type ResponseDiagnostics {
+    errMsgCntnt: [ErrorMessageContent]
+}
+
+type ErrorMessageContent {
+    errCount: String
+    errCd: String
+    param: [String]
+}
+
+type PaymentObject {
+    pymtMsg: PaymentMessageResponse
+}
+
+type PaymentMessageResponse {
+    payMsgInfo: PaymentMessageHeader
+    processingDate: String
+    importDtTm: String
+    createDtTim: String
+    outputDt: String
+    credit: MinMax
+    debit: MinMax
+    branch: Branch
+    action: String
+    noOfBulks: NoOfBulks
+    multiEyeTrigger: String
+    ackNakOutputDate: String
+    incMtMxMsgInd: String
+    sendingSystem: String
+}
+
+type NoOfBulks {
+    credit: String
+    debit: String
+}
+
+type PaymentMessageHeader {
+    id: String
+    prio: String
+    fileRef: String
+    sender: String
+    receiver: String
+    state: String
+}
+
+type MinMax {
+    min: String
+    max: String
+}
+
+type Branch {
+    id: String
+    name: String
+}
+

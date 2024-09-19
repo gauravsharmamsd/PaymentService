@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 public class ResponseDiagnostics {
     private List<ErrorMessageContent> errMsgCntnt = new ArrayList<ErrorMessageContent>();
 }

@@ -7,6 +7,7 @@ public class PaymentMessageOverviewRequestSCMapper {
     public PaymentMessageS mapPaymentMessageSearchCriteria(PaymentMessageOverviewRequest paymentMessageOverviewRequest) {
         if (null != paymentMessageOverviewRequest) {
             PaymentMessageS paymentMessageS = new PaymentMessageS();
+            if(paymentMessageOverviewRequest.getPymntMsgReq()!=null && paymentMessageOverviewRequest.getPymntMsgReq().getPayMsgInfo()!=null)
             paymentMessageS.setId(paymentMessageOverviewRequest.getPymntMsgReq().getPayMsgInfo().getId());
             return paymentMessageS;
         }

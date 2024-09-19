@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/message")
+@RequestMapping("/paymentmessageservice")
 
 //@Controller
 public class MessageOverviewController {
@@ -22,7 +22,7 @@ public class MessageOverviewController {
     private org.payment.gui.service.PaymentMessageService messageOverviewService;
 
      @CrossOrigin
-     @RequestMapping("/overview")
+     @RequestMapping("/getpaymentmsgoverview")
      public PaymentMessageOverviewResponse overview(@RequestBody PaymentMessageOverviewRequest request) throws BilException {
          return messageOverviewService.getPaymentMessagesOverview(request);
 

@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class GroupHeader {
     private ResponseDiagnostics responseDiagnostics;
 }

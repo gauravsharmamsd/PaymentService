@@ -1,0 +1,21 @@
+input PaymentMessageOverviewRequest {
+    grpHdrReq: GroupHeaderReq
+    pymntMsgReq: PaymentMessageRequest
+}
+input GroupHeaderReq {
+    maxNum: Int
+}
+
+input PaymentMessageRequest {
+    payMsgInfo: PaymentMessageHeaderInput
+}
+
+input PaymentMessageHeaderInput {
+    id: String
+    prio: String
+    fileRef: String
+    sender: String
+    receiver: String
+    state: String
+}
+

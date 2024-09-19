@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ErrorMessageContent {
     private String errCount;
     private String errCd;
