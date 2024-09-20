@@ -85,7 +85,7 @@ public class PaymentMessageService extends BaseExecutor {
 
             pymntObjList.add(pymntObj);
 
-            next = null;
+            next = paymentMessageOverview.getNext();
 
         }
         return pymntObjList;
