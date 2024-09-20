@@ -9,8 +9,16 @@ public class BranchTranslator {
         BranchHeader bh = null;
         if(null != branch){
             bh = new BranchHeader();
-            bh.setId(Long.valueOf(String.valueOf(branch.getId())));
-            bh.setName(branch.getName());
+
+
+            if(null !=branch.getId()){
+                bh.setId(Long.valueOf(String.valueOf(branch.getId())));
+            }
+            if(null !=branch.getName()){
+                bh.setName(branch.getName());
+            }
+
+
         }
         return bh;
     }

@@ -6,6 +6,7 @@ import com.equens.bil.core.dto.PaymentMessage;
 import com.equens.bil.core.dto.enums.MessageE;
 import com.equens.bil.core.dto.enums.PaymentMessageE;
 
+import com.equens.bil.core.dto.enums.PaymentObjectE;
 import com.equens.bil.core.dto.search.PaymentMessageS;
 import org.payment.gui.cmn.ErrorMessageContent;
 import org.payment.gui.cmn.GroupHeader;
@@ -84,7 +85,7 @@ public class PaymentMessageService extends BaseExecutor {
 
             pymntObjList.add(pymntObj);
 
-            next = paymentMessageOverview.getNext();
+            next = null;
 
         }
         return pymntObjList;
@@ -97,7 +98,14 @@ public class PaymentMessageService extends BaseExecutor {
         for (PaymentMessageE value : values) {
             requestMap.put(value.getType(), Boolean.TRUE);
         }
+        for (MessageE fieldId : MessageE.values()) {
+            requestMap.put(fieldId.getType(), Boolean.TRUE);
+        }
+        // remove field ID for Message.id; will be fetched by PaymentMessage.id
+        requestMap.remove(MessageE.MESSAGE_ID.getType());
         requestMap.remove(MessageE.IN_OUT_INDICATOR.getType());
+        requestMap.put(PaymentObjectE.PRIORITY.getType(), Boolean.TRUE);
+        requestMap.put(PaymentObjectE.BRANCH.getType(), Boolean.TRUE);
         return requestMap;
     }
 
